@@ -6,7 +6,7 @@ import matplotlib.pyplot as pyplot
 from errno import EEXIST
 from os import makedirs, path
 
-def maze(width=50, height=50, complexity=0.05, density=0.75):
+def maze(width=50, height=50, complexity=0.75, density=1.00):
     # Only odd shapes
     shape = ((height // 2) * 2 + 1, (width // 2) * 2 + 1)
     # Adjust complexity and density relative to maze size
