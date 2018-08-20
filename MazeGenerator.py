@@ -1,3 +1,5 @@
+import argparse
+import os
 import numpy
 from numpy.random import random_integers as rand
 import matplotlib.pyplot as pyplot
@@ -44,16 +46,33 @@ def mkdir_p(mypath):
 
 
 def generate_data(size=4):
-    for i in range(0,size):
-        pyplot.figure(figsize=(10, 5))
-        pyplot.imshow(maze(80, 40), cmap=pyplot.cm.binary, interpolation='nearest')
-        pyplot.xticks([]), pyplot.yticks([])
-        pyplot.show()
-        #pyplot.savefig(str(i)+'.png')
+    try:
+        for i in range(0 ,int(size)):
+            pyplot.figure(figsize=(10, 5))
+            pyplot.imshow(maze(80, 40), cmap=pyplot.cm.binary, interpolation='nearest')
+            pyplot.xticks([]), pyplot.yticks([])
+            pyplot.savefig("/Users/bmathew2014/PycharmProjects/MazePathFinder/Assets/"+str(i)+'.png')
 
+    except Exception as e:
+        print(str(e))
 
 def main():
-    generate_data(2)
+    parser = argparse.ArgumentParser(description="Maze Generation Script-Script")
+    parser.add_argument("-n", metavar='N',type=int,help="Sample Input Size")
+    parser.add_argument("-s", metavar='S',type=bool,help="Show Random Images")
+    args = parser.parse_args()
+    # If Assesst Folder does not Exist then create it
+
+    if(os.path.isdir("/MazePathFinder/Assets/")):
+        os.makedirs("/MazePathFinder/Assets/")
+
+    else:
+        generate_data(args.n)
+
+    if(args.s):
+        print("Displaying Images:\n")
+        pyplot.show()
+
 
 if __name__=='__main__':
     main()
